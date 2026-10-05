@@ -3,10 +3,15 @@
 
 import type { UserProfile, WorkoutSessionLog, DailyNutritionLog, ReadinessCheckinData } from '../types';
 
-function getBackendUrl(): string {
+export function getBackendUrl(): string {
   if (typeof window !== 'undefined' && window.location) {
+    const custom = localStorage.getItem('custom_spring_boot_api_url');
+    if (custom && custom.trim().length > 0) {
+      return custom.trim().replace(/\/$/, '');
+    }
+
     const envUrl = (import.meta as any).env?.VITE_SPRING_BOOT_API_URL;
-    if (envUrl) return envUrl;
+    if (envUrl) return envUrl.replace(/\/$/, '');
 
     const hostname = window.location.hostname;
     // Local development or LAN IP access over HTTP
@@ -21,6 +26,20 @@ function getBackendUrl(): string {
     }
   }
   return (import.meta as any).env?.VITE_SPRING_BOOT_API_URL || 'http://localhost:8080/api';
+}
+
+export function setCustomBackendUrl(url: string | null): void {
+  if (typeof window !== 'undefined') {
+    if (!url || url.trim().length === 0) {
+      localStorage.removeItem('custom_spring_boot_api_url');
+    } else {
+      let cleaned = url.trim().replace(/\/$/, '');
+      if (!cleaned.endsWith('/api') && !cleaned.includes('/api/')) {
+        cleaned = `${cleaned}/api`;
+      }
+      localStorage.setItem('custom_spring_boot_api_url', cleaned);
+    }
+  }
 }
 
 export const BACKEND_URL = getBackendUrl();

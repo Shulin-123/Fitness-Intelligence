@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Server, Activity, Database, CheckCircle, AlertTriangle, RefreshCw, X, FlaskConical } from 'lucide-react';
-import { pingBackendHealth, type BackendHealthStatus, BACKEND_URL } from '../../services/springBootApi';
+import { Server, Activity, Database, CheckCircle, AlertTriangle, RefreshCw, X, FlaskConical, Cloud, ExternalLink, Save, RotateCcw } from 'lucide-react';
+import { pingBackendHealth, type BackendHealthStatus, getBackendUrl, setCustomBackendUrl } from '../../services/springBootApi';
 import { BiomechanicsLabModal } from './BiomechanicsLabModal';
 
 export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ className = '' }) => {
@@ -8,11 +8,16 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [labOpen, setLabOpen] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState(getBackendUrl());
+  const [customInput, setCustomInput] = useState(() => {
+    return typeof window !== 'undefined' ? localStorage.getItem('custom_spring_boot_api_url') || '' : '';
+  });
 
   const checkConnection = async () => {
     setLoading(true);
     const status = await pingBackendHealth();
     setHealth(status);
+    setCurrentUrl(getBackendUrl());
     setLoading(false);
   };
 
@@ -22,6 +27,20 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
     const interval = setInterval(checkConnection, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSaveCustomUrl = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCustomBackendUrl(customInput);
+    setCurrentUrl(getBackendUrl());
+    checkConnection();
+  };
+
+  const handleResetUrl = () => {
+    setCustomBackendUrl(null);
+    setCustomInput('');
+    setCurrentUrl(getBackendUrl());
+    checkConnection();
+  };
 
   const isConnected = health?.connected ?? false;
   const isHosted =
@@ -40,7 +59,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
             ? 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20'
             : 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20'
         } ${className}`}
-        title={`Spring Boot Backend: ${isConnected ? 'Connected' : isHosted ? 'Runs on local PC (Port 8080)' : 'Offline'}`}
+        title={`Spring Boot Backend: ${isConnected ? 'Connected' : isHosted ? 'Runs on local PC or Free Cloud' : 'Offline'}`}
         aria-label="Spring Boot Backend Status"
       >
         <span
@@ -52,13 +71,13 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
           {loading
             ? 'Spring Boot...'
             : isConnected
-            ? `Spring Boot 8080 (${health?.latencyMs}ms)`
+            ? `Spring Boot (${health?.latencyMs}ms)`
             : isHosted
-            ? 'Spring Boot (Local PC)'
+            ? 'Spring Boot (Local/Cloud)'
             : 'Spring Boot Offline'}
         </span>
         <span className="sm:hidden font-mono">
-          {isConnected ? `${health?.latencyMs}ms` : isHosted ? 'Local PC' : 'Offline'}
+          {isConnected ? `${health?.latencyMs}ms` : isHosted ? 'Local/Cloud' : 'Offline'}
         </span>
       </button>
 
@@ -71,7 +90,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="w-full max-w-md bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden p-6 relative"
+            className="w-full max-w-lg bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden p-6 relative max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -82,7 +101,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-[var(--text)]">Spring Boot Backend</h3>
-                  <p className="text-xs text-[var(--muted)]">Java 22 • Spring Boot 3.3.4 • H2 JPA</p>
+                  <p className="text-xs text-[var(--muted)]">Java 21 • Spring Boot 3.3.4 • H2 JPA REST</p>
                 </div>
               </div>
               <button
@@ -108,7 +127,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                     </>
                   ) : (
                     <>
-                      <AlertTriangle className="w-3.5 h-3.5" /> UNREACHABLE
+                      <AlertTriangle className="w-3.5 h-3.5" /> UNREACHABLE / STANDBY
                     </>
                   )}
                 </span>
@@ -124,9 +143,56 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
               </div>
 
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[var(--muted)]">API Base URL:</span>
-                <span className="font-mono text-xs text-[#FF6B1A] font-semibold">{BACKEND_URL}</span>
+                <span className="text-[var(--muted)]">Active API Target:</span>
+                <span className="font-mono text-[11px] text-[#FF6B1A] font-semibold break-all text-right">{currentUrl}</span>
               </div>
+            </div>
+
+            {/* Cloud Backend / Custom URL Settings */}
+            <div className="mt-4 p-4 rounded-xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 font-bold text-xs text-indigo-400">
+                  <Cloud className="w-4 h-4" />
+                  <span>Free Cloud Backend Connection</span>
+                </div>
+                <a
+                  href="https://render.com/deploy?repo=https://github.com/Shulin-123/Fitness-Intelligence"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#FF6B1A] hover:underline"
+                >
+                  Deploy on Render (Free) <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+              <p className="text-[11px] text-[var(--muted)] leading-relaxed">
+                Deploy the backend on Render for $0/mo, then paste your service URL here to connect it live with GitHub Pages:
+              </p>
+              <form onSubmit={handleSaveCustomUrl} className="flex gap-2">
+                <input
+                  type="url"
+                  placeholder="https://fitness-intelligence-backend.onrender.com/api"
+                  value={customInput}
+                  onChange={(e) => setCustomInput(e.target.value)}
+                  className="flex-1 px-3 py-1.5 text-xs rounded-lg bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder-[var(--muted)] focus:outline-none focus:border-[#FF6B1A] font-mono"
+                />
+                <button
+                  type="submit"
+                  className="px-3 py-1.5 rounded-lg bg-[#FF6B1A] hover:bg-[#FF853E] text-[#0F0B09] font-bold text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  Save
+                </button>
+                {customInput && (
+                  <button
+                    type="button"
+                    onClick={handleResetUrl}
+                    title="Reset to default"
+                    className="p-1.5 rounded-lg bg-[var(--surface)] hover:bg-[var(--border)] text-[var(--muted)] hover:text-[var(--text)] transition-colors cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </form>
             </div>
 
             {/* Hosted vs Local Explanation Banner */}
@@ -137,18 +203,21 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                   <span>Public Web Deployment (GitHub Pages)</span>
                 </div>
                 <p className="text-[var(--text)] text-[11px] leading-relaxed">
-                  You are viewing the public cloud deployment on GitHub Pages. The Spring Boot backend runs locally on your PC (port 8080).
+                  The static frontend is live on GitHub Pages. To connect the backend:
                 </p>
                 <div className="pt-1 flex flex-col gap-1.5 text-[11px] text-[var(--muted)]">
                   <div>
-                    • <strong>To run with Spring Boot live:</strong> Open the app on this computer at{' '}
+                    • <strong>Option A (100% Free Cloud):</strong> Click <em>Deploy on Render</em> above to get a free 24/7 cloud API URL.
+                  </div>
+                  <div>
+                    • <strong>Option B (Local Dev):</strong> Open the app locally on this PC at{' '}
                     <a href="http://localhost:5173" className="text-[#FF6B1A] underline font-mono font-semibold">
                       http://localhost:5173
                     </a>
                     .
                   </div>
                   <div>
-                    • <strong>Full client-side autonomy:</strong> All workouts, nutrition logs, calculations, and AI form checks run 100% in your browser.
+                    • <strong>Client Autonomy:</strong> Even when backend is standby, all workouts, nutrition logs, and biomechanics calculations work 100% locally.
                   </div>
                 </div>
               </div>
@@ -161,7 +230,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
               </p>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <a
-                  href={`${BACKEND_URL}/health`}
+                  href={`${currentUrl}/health`}
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-lg bg-[var(--surface-2)] hover:bg-[var(--border)] transition-colors text-[var(--text)] flex items-center justify-between font-mono text-[11px]"
@@ -170,7 +239,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                   <span className="text-[#FF6B1A]">↗</span>
                 </a>
                 <a
-                  href={`${BACKEND_URL}/database/preview`}
+                  href={`${currentUrl}/database/preview`}
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-lg bg-[var(--surface-2)] hover:bg-[var(--border)] transition-colors text-[var(--text)] flex items-center justify-between font-mono text-[11px]"
@@ -179,7 +248,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                   <span className="text-[#FF6B1A]">↗</span>
                 </a>
                 <a
-                  href={`${BACKEND_URL}/engine/demo-assessment`}
+                  href={`${currentUrl}/engine/demo-assessment`}
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-lg bg-[var(--surface-2)] hover:bg-[var(--border)] transition-colors text-[var(--text)] flex items-center justify-between font-mono text-[11px]"
@@ -188,7 +257,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                   <span className="text-[#FF6B1A]">↗</span>
                 </a>
                 <a
-                  href={`${BACKEND_URL}/workouts`}
+                  href={`${currentUrl}/workouts`}
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-lg bg-[var(--surface-2)] hover:bg-[var(--border)] transition-colors text-[var(--text)] flex items-center justify-between font-mono text-[11px]"
