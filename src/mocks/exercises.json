@@ -1,0 +1,590 @@
+[
+  {
+    "id": "barbell_back_squat",
+    "name": "Barbell Back Squat",
+    "muscleGroup": "legs",
+    "equipment": "barbell",
+    "difficulty": "advanced",
+    "contraindicationTags": ["knee", "lower_back"],
+    "alternativeExerciseId": "leg_press",
+    "shortCueText": "Drive knees out, keep chest proud, hit parallel.",
+    "videoAnalysisSupported": "squat"
+  },
+  {
+    "id": "bodyweight_squat",
+    "name": "Bodyweight Squat",
+    "muscleGroup": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "contraindicationTags": ["knee"],
+    "alternativeExerciseId": "box_squat",
+    "shortCueText": "Sit hips back as if onto a chair, weight in midfoot.",
+    "videoAnalysisSupported": "squat"
+  },
+  {
+    "id": "box_squat",
+    "name": "Goblet Box Squat",
+    "muscleGroup": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Touch box lightly without relaxing tension."
+  },
+  {
+    "id": "goblet_squat",
+    "name": "Dumbbell Goblet Squat",
+    "muscleGroup": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["knee"],
+    "alternativeExerciseId": "leg_press",
+    "shortCueText": "Keep dumbbell tight to collarbone, elbows inside knees.",
+    "videoAnalysisSupported": "squat"
+  },
+  {
+    "id": "leg_press",
+    "name": "45° Leg Press",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Feet shoulder-width on carriage, lower back pressed firm."
+  },
+  {
+    "id": "hack_squat",
+    "name": "Machine Hack Squat",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["knee"],
+    "alternativeExerciseId": "leg_press",
+    "shortCueText": "Smooth descent, drive through midfoot."
+  },
+  {
+    "id": "bulgarian_split_squat",
+    "name": "Bulgarian Split Squat",
+    "muscleGroup": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["knee"],
+    "alternativeExerciseId": "reverse_lunge",
+    "shortCueText": "Front knee tracks over second toe, lean slightly forward."
+  },
+  {
+    "id": "reverse_lunge",
+    "name": "Dumbbell Reverse Lunge",
+    "muscleGroup": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["knee"],
+    "alternativeExerciseId": "leg_extension",
+    "shortCueText": "Step back softly, keep 90° angles in both knees."
+  },
+  {
+    "id": "romanian_deadlift",
+    "name": "Barbell Romanian Deadlift (RDL)",
+    "muscleGroup": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "seated_leg_curl",
+    "shortCueText": "Push hips back like closing a door, soft knee bend."
+  },
+  {
+    "id": "db_romanian_deadlift",
+    "name": "Dumbbell RDL",
+    "muscleGroup": "legs",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "lying_leg_curl",
+    "shortCueText": "Keep dumbbells grazing your shins, flat neutral spine."
+  },
+  {
+    "id": "barbell_deadlift",
+    "name": "Conventional Barbell Deadlift",
+    "muscleGroup": "legs",
+    "equipment": "barbell",
+    "difficulty": "advanced",
+    "contraindicationTags": ["lower_back", "wrist"],
+    "alternativeExerciseId": "trap_bar_deadlift",
+    "shortCueText": "Pull slack out of bar, drive floor away with legs."
+  },
+  {
+    "id": "trap_bar_deadlift",
+    "name": "Trap Bar Deadlift",
+    "muscleGroup": "legs",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "leg_press",
+    "shortCueText": "Neutral grip, upright torso, push floor away."
+  },
+  {
+    "id": "leg_extension",
+    "name": "Seated Leg Extension Machine",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": ["knee"],
+    "alternativeExerciseId": "box_squat",
+    "shortCueText": "Pause 1 sec at top, controlled negative."
+  },
+  {
+    "id": "seated_leg_curl",
+    "name": "Seated Leg Curl Machine",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Drive heels back toward seat, controlled stretch."
+  },
+  {
+    "id": "lying_leg_curl",
+    "name": "Lying Leg Curl Machine",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "seated_leg_curl",
+    "shortCueText": "Keep hips pinned to pad throughout range."
+  },
+  {
+    "id": "standing_calf_raise",
+    "name": "Standing Calf Raise",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Full stretch at bottom, rise onto big toes at top."
+  },
+  {
+    "id": "seated_calf_raise",
+    "name": "Seated Calf Raise",
+    "muscleGroup": "legs",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Pause in deep stretch for 2 seconds before contraction."
+  },
+  {
+    "id": "standard_push_up",
+    "name": "Standard Push-Up",
+    "muscleGroup": "chest",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "contraindicationTags": ["wrist", "shoulder"],
+    "alternativeExerciseId": "incline_push_up",
+    "shortCueText": "Plank posture, elbows at 45 degrees, chest to floor.",
+    "videoAnalysisSupported": "push_up"
+  },
+  {
+    "id": "incline_push_up",
+    "name": "Incline Push-Up (Bench)",
+    "muscleGroup": "chest",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "chest_press_machine",
+    "shortCueText": "Hands on elevated bench, easier leverage for clean form.",
+    "videoAnalysisSupported": "push_up"
+  },
+  {
+    "id": "barbell_bench_press",
+    "name": "Barbell Bench Press",
+    "muscleGroup": "chest",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder", "wrist"],
+    "alternativeExerciseId": "chest_press_machine",
+    "shortCueText": "Pinch shoulder blades, touch mid-sternum, drive up."
+  },
+  {
+    "id": "dumbbell_bench_press",
+    "name": "Flat Dumbbell Press",
+    "muscleGroup": "chest",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "chest_press_machine",
+    "shortCueText": "Slight arch, rotate dumbbells slightly inward for joint comfort."
+  },
+  {
+    "id": "incline_dumbbell_press",
+    "name": "Incline Dumbbell Press",
+    "muscleGroup": "chest",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "incline_machine_press",
+    "shortCueText": "Bench at 30 degrees, press up and converge softly."
+  },
+  {
+    "id": "incline_machine_press",
+    "name": "Incline Chest Press Machine",
+    "muscleGroup": "chest",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Handles at upper chest level, stable back support."
+  },
+  {
+    "id": "chest_press_machine",
+    "name": "Seated Chest Press Machine",
+    "muscleGroup": "chest",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Smooth rhythm, avoid snapping elbows at lock-out."
+  },
+  {
+    "id": "pec_deck_fly",
+    "name": "Pec Deck / Butterfly Machine",
+    "muscleGroup": "chest",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "cable_crossover",
+    "shortCueText": "Lead with elbows, squeeze chest in the center."
+  },
+  {
+    "id": "cable_crossover",
+    "name": "Standing Cable Fly / Crossover",
+    "muscleGroup": "chest",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "chest_press_machine",
+    "shortCueText": "Slight torso lean, bring handles together like hugging a tree."
+  },
+  {
+    "id": "dips_assisted",
+    "name": "Machine Assisted Chest Dip",
+    "muscleGroup": "chest",
+    "equipment": "machine",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder", "wrist"],
+    "alternativeExerciseId": "chest_press_machine",
+    "shortCueText": "Lean torso forward 15 degrees, lower to 90 degree elbow bend."
+  },
+  {
+    "id": "barbell_bent_row",
+    "name": "Barbell Bent-Over Row",
+    "muscleGroup": "back",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["lower_back", "wrist"],
+    "alternativeExerciseId": "chest_supported_row",
+    "shortCueText": "Hinge to 45 degrees, pull bar to belly button, squeeze lats."
+  },
+  {
+    "id": "chest_supported_row",
+    "name": "Chest-Supported T-Bar / Dumbbell Row",
+    "muscleGroup": "back",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Chest flat on incline pad, zero lower-back strain."
+  },
+  {
+    "id": "single_arm_db_row",
+    "name": "Single-Arm Dumbbell Row",
+    "muscleGroup": "back",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "seated_cable_row",
+    "shortCueText": "Support hand on bench, pull dumbbell to pocket."
+  },
+  {
+    "id": "lat_pulldown",
+    "name": "Cable Lat Pulldown",
+    "muscleGroup": "back",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "close_grip_pulldown",
+    "shortCueText": "Pull bar to upper chest, drive elbows down and back."
+  },
+  {
+    "id": "close_grip_pulldown",
+    "name": "Neutral-Grip Lat Pulldown",
+    "muscleGroup": "back",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "V-bar handle, joint-friendly shoulder tracking."
+  },
+  {
+    "id": "pull_up_assisted",
+    "name": "Assisted Pull-Up",
+    "muscleGroup": "back",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": ["shoulder", "wrist"],
+    "alternativeExerciseId": "lat_pulldown",
+    "shortCueText": "Depress shoulder blades first, pull chest to bar."
+  },
+  {
+    "id": "seated_cable_row",
+    "name": "Seated Cable Row",
+    "muscleGroup": "back",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "chest_supported_row",
+    "shortCueText": "Sit tall, pull handle into lower ribs, avoid rocking."
+  },
+  {
+    "id": "straight_arm_pulldown",
+    "name": "Standing Cable Straight-Arm Pulldown",
+    "muscleGroup": "back",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Slight torso hinge, sweep bar down in an arc with straight arms."
+  },
+  {
+    "id": "face_pull",
+    "name": "Cable Face Pull",
+    "muscleGroup": "shoulders",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Rope attachment, pull to eye level and rotate hands back."
+  },
+  {
+    "id": "db_overhead_press",
+    "name": "Seated Dumbbell Shoulder Press",
+    "muscleGroup": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder", "lower_back"],
+    "alternativeExerciseId": "machine_shoulder_press",
+    "shortCueText": "Back supported, press overhead in the scapular plane."
+  },
+  {
+    "id": "barbell_overhead_press",
+    "name": "Standing Barbell Overhead Press (OHP)",
+    "muscleGroup": "shoulders",
+    "equipment": "barbell",
+    "difficulty": "advanced",
+    "contraindicationTags": ["shoulder", "lower_back", "wrist"],
+    "alternativeExerciseId": "machine_shoulder_press",
+    "shortCueText": "Glutes tight, bar clears chin, press to lockout overhead."
+  },
+  {
+    "id": "machine_shoulder_press",
+    "name": "Seated Machine Shoulder Press",
+    "muscleGroup": "shoulders",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Neutral grip handles reduce front shoulder impingement."
+  },
+  {
+    "id": "db_lateral_raise",
+    "name": "Dumbbell Lateral Raise",
+    "muscleGroup": "shoulders",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["shoulder"],
+    "alternativeExerciseId": "cable_lateral_raise",
+    "shortCueText": "Raise to shoulder height slightly in front of body."
+  },
+  {
+    "id": "cable_lateral_raise",
+    "name": "Cable Lateral Raise",
+    "muscleGroup": "shoulders",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Constant tension throughout entire range of motion."
+  },
+  {
+    "id": "reverse_pec_deck",
+    "name": "Reverse Pec Deck (Rear Delts)",
+    "muscleGroup": "shoulders",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Keep arms almost straight, sweep back without shrugging."
+  },
+  {
+    "id": "db_biceps_curl",
+    "name": "Standing Dumbbell Biceps Curl",
+    "muscleGroup": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["wrist"],
+    "alternativeExerciseId": "cable_biceps_curl",
+    "shortCueText": "Pin elbows to side, curl and supinate wrist at peak.",
+    "videoAnalysisSupported": "biceps_curl"
+  },
+  {
+    "id": "hammer_curl",
+    "name": "Dumbbell Hammer Curl",
+    "muscleGroup": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Neutral palms-facing grip, targets brachialis and forearm.",
+    "videoAnalysisSupported": "biceps_curl"
+  },
+  {
+    "id": "incline_db_curl",
+    "name": "Incline Bench Dumbbell Curl",
+    "muscleGroup": "arms",
+    "equipment": "dumbbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder", "wrist"],
+    "alternativeExerciseId": "preacher_curl_machine",
+    "shortCueText": "Lie on 60° incline, long head stretch at bottom."
+  },
+  {
+    "id": "preacher_curl_machine",
+    "name": "Preacher Curl Machine",
+    "muscleGroup": "arms",
+    "equipment": "machine",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Armpits over top pad, full isolation without swinging."
+  },
+  {
+    "id": "cable_biceps_curl",
+    "name": "Cable Biceps Curl",
+    "muscleGroup": "arms",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Straight bar or rope, constant resistance throughout.",
+    "videoAnalysisSupported": "biceps_curl"
+  },
+  {
+    "id": "cable_triceps_pushdown",
+    "name": "Cable Triceps Pushdown (Rope)",
+    "muscleGroup": "arms",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": ["elbow"],
+    "alternativeExerciseId": "straight_bar_pushdown",
+    "shortCueText": "Elbows pinned to ribs, spread rope ends at bottom."
+  },
+  {
+    "id": "straight_bar_pushdown",
+    "name": "Cable Straight-Bar Triceps Pushdown",
+    "muscleGroup": "arms",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": ["wrist"],
+    "alternativeExerciseId": "cable_triceps_pushdown",
+    "shortCueText": "Overhand grip, press straight down to full extension."
+  },
+  {
+    "id": "overhead_triceps_extension",
+    "name": "Cable Overhead Triceps Extension",
+    "muscleGroup": "arms",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder", "elbow"],
+    "alternativeExerciseId": "cable_triceps_pushdown",
+    "shortCueText": "Lean forward, stretch long head behind neck, extend arms."
+  },
+  {
+    "id": "skull_crushers",
+    "name": "EZ-Bar Lying Triceps Extension",
+    "muscleGroup": "arms",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["elbow", "wrist"],
+    "alternativeExerciseId": "cable_triceps_pushdown",
+    "shortCueText": "Lower bar toward hairline, extend forearms upward."
+  },
+  {
+    "id": "plank",
+    "name": "Forearm Plank",
+    "muscleGroup": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "contraindicationTags": ["lower_back", "shoulder"],
+    "alternativeExerciseId": "deadbug",
+    "shortCueText": "Elbows under shoulders, ribs down, squeeze glutes."
+  },
+  {
+    "id": "deadbug",
+    "name": "Deadbug",
+    "muscleGroup": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Press lower back firmly into floor as opposing limbs extend."
+  },
+  {
+    "id": "cable_woodchopper",
+    "name": "Cable Diagonal Woodchopper",
+    "muscleGroup": "core",
+    "equipment": "cable",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "pallof_press",
+    "shortCueText": "Rotate from hips and core, keep arms long."
+  },
+  {
+    "id": "pallof_press",
+    "name": "Cable Pallof Anti-Rotation Press",
+    "muscleGroup": "core",
+    "equipment": "cable",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Stand sideways to cable, press hands straight out without twisting."
+  },
+  {
+    "id": "hanging_knee_raise",
+    "name": "Hanging Knee / Leg Raise",
+    "muscleGroup": "core",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["shoulder", "wrist"],
+    "alternativeExerciseId": "reverse_crunch",
+    "shortCueText": "Curl pelvis upward, avoid swinging momentum."
+  },
+  {
+    "id": "reverse_crunch",
+    "name": "Lying Reverse Crunch",
+    "muscleGroup": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "contraindicationTags": [],
+    "shortCueText": "Roll hips off ground toward ribs, slow eccentric descent."
+  },
+  {
+    "id": "ab_wheel_rollout",
+    "name": "Ab Wheel Rollout (From Knees)",
+    "muscleGroup": "core",
+    "equipment": "bodyweight",
+    "difficulty": "advanced",
+    "contraindicationTags": ["lower_back", "shoulder"],
+    "alternativeExerciseId": "plank",
+    "shortCueText": "Tuck tailbone, roll out only as far as back stays flat."
+  },
+  {
+    "id": "kettlebell_swing",
+    "name": "Kettlebell Swing",
+    "muscleGroup": "full_body",
+    "equipment": "kettlebell",
+    "difficulty": "intermediate",
+    "contraindicationTags": ["lower_back"],
+    "alternativeExerciseId": "romanian_deadlift",
+    "shortCueText": "Hinge at hips, snap glutes to standing, arms act as ropes."
+  },
+  {
+    "id": "farmer_walk",
+    "name": "Dumbbell Farmer Walk",
+    "muscleGroup": "full_body",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "contraindicationTags": ["wrist"],
+    "alternativeExerciseId": "plank",
+    "shortCueText": "Stand tall, walk with controlled heel-to-toe stride."
+  }
+]

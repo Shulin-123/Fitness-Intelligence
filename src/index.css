@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg-base: #0F0B09;
+  --color-surface: #17110E;
+  --color-surface-2: #1F1814;
+  --color-surface-hover: #2A211B;
+  --color-border-subtle: rgba(255, 235, 220, 0.09);
+  --color-border-medium: rgba(255, 235, 220, 0.18);
+  --color-text-main: #FFF4EC;
+  --color-text-muted: #A89A90;
+
+  --color-accent: #FF6B1A;
+  --color-accent-hover: #FF8A3D;
+  --color-accent-deep: #E04E00;
+  --color-ember: #FFB547;
+  --color-accent-glow: rgba(255, 107, 26, 0.35);
+
+  --color-success: #22C55E;
+  --color-warning: #FACC15;
+  --color-danger: #F87171;
+
+  --font-sans: 'Inter Tight', Geist, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0F0B09;
+  --surface: #17110E;
+  --surface-2: #1F1814;
+  --surface-hover: #2A211B;
+  --border: rgba(255, 235, 220, 0.09);
+  --border-strong: rgba(255, 235, 220, 0.18);
+  --text: #FFF4EC;
+  --muted: #A89A90;
+  --accent: #FF6B1A;
+  --accent-hover: #FF8A3D;
+  --accent-deep: #E04E00;
+  --ember: #FFB547;
+  --accent-glow: rgba(255, 107, 26, 0.35);
+  --success: #22C55E;
+  --warning: #FACC15;
+  --danger: #F87171;
+}
+
+html.light, :root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #F8F5F0;
+  --surface: #FFFFFF;
+  --surface-2: #F0ECE4;
+  --surface-hover: #E6DFD4;
+  --border: rgba(30, 20, 15, 0.10);
+  --border-strong: rgba(30, 20, 15, 0.20);
+  --text: #17110E;
+  --muted: #6B5E55;
+  --accent: #FF6B1A;
+  --accent-hover: #E04E00;
+  --accent-deep: #C73E00;
+  --ember: #D97706;
+  --accent-glow: rgba(255, 107, 26, 0.20);
+  --success: #16A34A;
+  --warning: #CA8A04;
+  --danger: #DC2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Tabular numerals for stats */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Layered depth atmosphere (CSS-only):
+   - Dark: #0F0B09 with warm ember glow
+   - Light: #F8F5F0 with crisp warm stone glow
+*/
+.app-atmosphere {
+  position: relative;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 10% 90%, rgba(255, 107, 26, 0.18) 0%, transparent 60vmax),
+    radial-gradient(circle at 90% 10%, rgba(255, 181, 71, 0.08) 0%, transparent 45vmax),
+    linear-gradient(to bottom, var(--bg) 0%, var(--bg) 70%, #0A0705 100%);
+  background-attachment: fixed;
+  transition: background-color 0.25s ease;
+}
+
+html.light .app-atmosphere {
+  background-image:
+    radial-gradient(circle at 10% 90%, rgba(255, 107, 26, 0.09) 0%, transparent 60vmax),
+    radial-gradient(circle at 90% 10%, rgba(255, 181, 71, 0.06) 0%, transparent 45vmax),
+    linear-gradient(to bottom, #F8F5F0 0%, #F2EDE2 70%, #E9E1D3 100%);
+  color: var(--text);
+}
+
+/* Light mode typography and contrast overrides */
+html.light h1:not([class*="text-[#FF"]):not([class*="text-red"]):not([class*="text-emerald"]):not([class*="text-amber"]),
+html.light h2:not([class*="text-[#FF"]):not([class*="text-red"]):not([class*="text-emerald"]):not([class*="text-amber"]),
+html.light h3:not([class*="text-[#FF"]):not([class*="text-red"]):not([class*="text-emerald"]):not([class*="text-amber"]),
+html.light h4:not([class*="text-[#FF"]):not([class*="text-red"]):not([class*="text-emerald"]):not([class*="text-amber"]) {
+  color: var(--text);
+}
+
+/* Hero headline color specification */
+html.light .hero-headline {
+  color: #FF6B1A !important;
+}
+
+html.dark .hero-headline {
+  color: #FFFFFF !important;
+}
+
+/* Ensure white and light cream text converts to readable dark espresso in light mode */
+html.light .text-white:not([class*="bg-red"]):not([class*="bg-green"]):not([class*="bg-emerald"]):not([class*="bg-[#FF"]):not([class*="bg-amber"]):not([class*="bg-blue"]):not([class*="bg-purple"]) {
+  color: var(--text);
+}
+
+html.light .text-\[\#FFF4EC\]:not([class*="bg-red"]):not([class*="bg-green"]):not([class*="bg-emerald"]):not([class*="bg-[#FF"]):not([class*="bg-amber"]):not([class*="bg-blue"]):not([class*="bg-purple"]) {
+  color: var(--text);
+}
+
+/* Ensure light stone muted text has crisp readable contrast in light mode */
+html.light .text-\[\#A89A90\] {
+  color: var(--muted);
+}
+
+/* Inputs and interactive elements in light mode */
+html.light input,
+html.light textarea,
+html.light select {
+  color: var(--text);
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: rgba(107, 94, 85, 0.5);
+}
+
+/* Glass card in light mode */
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(30, 20, 15, 0.10);
+  color: var(--text);
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #F8F5F0;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #E6DFD4;
+  border: 1px solid rgba(30, 20, 15, 0.10);
+}
+
+/* Film grain overlay (inline SVG noise, 4% opacity, pointer-events none) */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Landing hero slow drifting gradient mesh (30-40s loop) */
+@keyframes meshDrift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  50% {
+    background-position: 25% 15%, 80% 85%, 45% 60%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+}
+
+.hero-mesh {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 107, 26, 0.22) 0%, transparent 55vmax),
+    radial-gradient(circle at 85% 20%, rgba(255, 181, 71, 0.12) 0%, transparent 45vmax),
+    radial-gradient(circle at 50% 80%, rgba(224, 78, 0, 0.14) 0%, transparent 50vmax);
+  background-size: 140% 140%, 130% 130%, 150% 150%;
+  animation: meshDrift 35s ease-in-out infinite alternate;
+}
+
+/* Card glass effect */
+.glass-card {
+  background: rgba(23, 17, 14, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 235, 220, 0.09);
+  border-radius: 16px;
+}
+
+/* Accessible focus outline: 2px orange with 2px offset on all interactive elements */
+*:focus-visible {
+  outline: 2px solid #FF6B1A !important;
+  outline-offset: 2px !important;
+}
+
+/* ::selection color */
+::selection {
+  background-color: #FF6B1A;
+  color: #0F0B09;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0F0B09;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F1814;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 235, 220, 0.09);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6B1A;
+}
+
+/* Smooth motion when reduced motion is not requested */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-mesh {
+    animation: none !important;
+  }
+}
