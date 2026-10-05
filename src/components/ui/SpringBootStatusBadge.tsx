@@ -24,6 +24,9 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
   }, []);
 
   const isConnected = health?.connected ?? false;
+  const isHosted =
+    typeof window !== 'undefined' &&
+    (window.location.hostname.includes('github.io') || window.location.protocol === 'https:');
 
   return (
     <>
@@ -33,9 +36,11 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
         className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-all cursor-pointer border ${
           isConnected
             ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.15)]'
+            : isHosted
+            ? 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20'
             : 'bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20'
         } ${className}`}
-        title={`Spring Boot Backend: ${isConnected ? 'Connected' : 'Offline'}`}
+        title={`Spring Boot Backend: ${isConnected ? 'Connected' : isHosted ? 'Runs on local PC (Port 8080)' : 'Offline'}`}
         aria-label="Spring Boot Backend Status"
       >
         <span
@@ -44,10 +49,16 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
           }`}
         />
         <span className="hidden sm:inline font-mono">
-          {loading ? 'Spring Boot...' : isConnected ? `Spring Boot 8080 (${health?.latencyMs}ms)` : 'Spring Boot Offline'}
+          {loading
+            ? 'Spring Boot...'
+            : isConnected
+            ? `Spring Boot 8080 (${health?.latencyMs}ms)`
+            : isHosted
+            ? 'Spring Boot (Local PC)'
+            : 'Spring Boot Offline'}
         </span>
         <span className="sm:hidden font-mono">
-          {isConnected ? `${health?.latencyMs}ms` : 'Offline'}
+          {isConnected ? `${health?.latencyMs}ms` : isHosted ? 'Local PC' : 'Offline'}
         </span>
       </button>
 
@@ -117,6 +128,31 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                 <span className="font-mono text-xs text-[#FF6B1A] font-semibold">{BACKEND_URL}</span>
               </div>
             </div>
+
+            {/* Hosted vs Local Explanation Banner */}
+            {isHosted && !isConnected && (
+              <div className="mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-xs space-y-2">
+                <div className="flex items-center gap-2 font-bold text-amber-500">
+                  <AlertTriangle className="w-4 h-4 shrink-0" />
+                  <span>Public Web Deployment (GitHub Pages)</span>
+                </div>
+                <p className="text-[var(--text)] text-[11px] leading-relaxed">
+                  You are viewing the public cloud deployment on GitHub Pages. The Spring Boot backend runs locally on your PC (port 8080).
+                </p>
+                <div className="pt-1 flex flex-col gap-1.5 text-[11px] text-[var(--muted)]">
+                  <div>
+                    • <strong>To run with Spring Boot live:</strong> Open the app on this computer at{' '}
+                    <a href="http://localhost:5173" className="text-[#FF6B1A] underline font-mono font-semibold">
+                      http://localhost:5173
+                    </a>
+                    .
+                  </div>
+                  <div>
+                    • <strong>Full client-side autonomy:</strong> All workouts, nutrition logs, calculations, and AI form checks run 100% in your browser.
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Quick Links */}
             <div className="mt-4 space-y-2">

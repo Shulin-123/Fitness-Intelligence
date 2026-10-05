@@ -5,8 +5,18 @@ import type { UserProfile, WorkoutSessionLog, DailyNutritionLog, ReadinessChecki
 
 function getBackendUrl(): string {
   if (typeof window !== 'undefined' && window.location) {
+    const envUrl = (import.meta as any).env?.VITE_SPRING_BOOT_API_URL;
+    if (envUrl) return envUrl;
+
     const hostname = window.location.hostname;
-    if (hostname && hostname !== 'localhost' && hostname !== '127.0.0.1') {
+    // Local development or LAN IP access over HTTP
+    if (
+      hostname &&
+      hostname !== 'localhost' &&
+      hostname !== '127.0.0.1' &&
+      !hostname.includes('github.io') &&
+      window.location.protocol === 'http:'
+    ) {
       return `http://${hostname}:8080/api`;
     }
   }
