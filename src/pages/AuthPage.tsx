@@ -6,7 +6,6 @@ import {
   ArrowRight,
   User,
   Mail,
-  Sparkles,
   Eye,
   EyeOff,
 } from 'lucide-react';
@@ -25,7 +24,6 @@ export const AuthPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [demoLoading, setDemoLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,19 +56,6 @@ export const AuthPage: React.FC = () => {
       showToast(err instanceof Error ? err.message : 'Authentication failed', 'error');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleLaunchDemo = async () => {
-    setDemoLoading(true);
-    try {
-      await services.auth.enableDemoMode();
-      showToast('Demo Persona loaded: 3 weeks of historical logs ready!', 'success');
-      navigate('/dashboard');
-    } catch (err) {
-      showToast('Could not load demo persona', 'error');
-    } finally {
-      setDemoLoading(false);
     }
   };
 
@@ -220,33 +205,6 @@ export const AuthPage: React.FC = () => {
               </span>
             </Button>
           </form>
-
-          <div className="relative flex py-1 items-center">
-            <div className="flex-grow border-t border-[var(--border)]" />
-            <span className="flex-shrink mx-3 text-xs text-[var(--muted)] uppercase tracking-wider">
-              Or Try Immediately
-            </span>
-            <div className="flex-grow border-t border-[var(--border)]" />
-          </div>
-
-          {/* Instant 1-Click Demo Launcher */}
-          <Button
-            type="button"
-            variant="secondary"
-            size="lg"
-            className="w-full"
-            isLoading={demoLoading}
-            onClick={handleLaunchDemo}
-          >
-            <span className="flex items-center justify-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#FF6B1A]" />
-              Launch 3-Week Historical Demo
-            </span>
-          </Button>
-
-          <p className="text-[11px] text-[var(--muted)] text-center">
-            Pre-loaded with 21 days of bodyweight trends, meals, sets, and adaptive weekly reviews.
-          </p>
         </Card>
 
         {/* Footer info */}

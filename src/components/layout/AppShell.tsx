@@ -47,6 +47,21 @@ export const AppShell: React.FC = () => {
     location.pathname === '/login' ||
     location.pathname === '/assessment';
 
+  const currentUser = services.auth.getCurrentUser();
+  const isAuthenticated = !!(
+    currentUser &&
+    !currentUser.email?.includes('alex.demo') &&
+    currentUser.name !== 'Alex Morgan' &&
+    !services.auth.isDemoMode()
+  );
+
+  React.useEffect(() => {
+    if (!isPublicPage && !isAuthenticated) {
+      showToast('Please sign in or create an account to access the dashboard.', 'warning');
+      navigate('/login', { replace: true });
+    }
+  }, [isPublicPage, isAuthenticated, navigate, showToast]);
+
   if (isPublicPage) {
     return (
       <div className="min-h-screen app-atmosphere text-[var(--text)] flex flex-col relative selection:bg-[#FF6B1A] selection:text-[#0F0B09]">
@@ -60,6 +75,10 @@ export const AppShell: React.FC = () => {
         </main>
       </div>
     );
+  }
+
+  if (!isAuthenticated) {
+    return null;
   }
 
   return (

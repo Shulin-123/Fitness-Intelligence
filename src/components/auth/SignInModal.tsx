@@ -8,7 +8,6 @@ import {
   Eye,
   EyeOff,
   Zap,
-  ArrowRight,
   ShieldCheck,
 } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -36,7 +35,6 @@ export const SignInModal: React.FC<SignInModalProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [demoLoading, setDemoLoading] = useState(false);
 
   if (!isOpen) return null;
 
@@ -79,24 +77,6 @@ export const SignInModal: React.FC<SignInModalProps> = ({
       showToast(err instanceof Error ? err.message : 'Authentication failed', 'error');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handle1ClickDemo = async () => {
-    setDemoLoading(true);
-    try {
-      await services.auth.enableDemoMode();
-      showToast('Loaded 3-week Demo Persona (Alex Morgan, 28yo).', 'success');
-      onClose();
-      if (onSuccess) {
-        onSuccess();
-      } else {
-        navigate('/dashboard');
-      }
-    } catch {
-      showToast('Could not enable demo mode', 'error');
-    } finally {
-      setDemoLoading(false);
     }
   };
 
@@ -169,33 +149,6 @@ export const SignInModal: React.FC<SignInModalProps> = ({
           >
             Create Account
           </button>
-        </div>
-
-        {/* Quick Demo 1-Click Button */}
-        <div className="px-6 mb-4">
-          <button
-            type="button"
-            onClick={handle1ClickDemo}
-            disabled={demoLoading}
-            className="w-full p-3 rounded-xl bg-gradient-to-r from-[#FF6B1A]/15 via-[#FFB547]/10 to-[#FF6B1A]/15 border border-[#FF6B1A]/30 hover:border-[#FF6B1A] text-[var(--text)] text-xs font-semibold flex items-center justify-between transition-all group cursor-pointer"
-          >
-            <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-[#FF6B1A] animate-pulse" />
-              <div className="text-left">
-                <span className="font-bold text-[#FF6B1A] block">1-Click Instant Demo</span>
-                <span className="text-[11px] text-[var(--muted)]">Alex Morgan (28yo, 3-week history)</span>
-              </div>
-            </div>
-            <ArrowRight className="w-4 h-4 text-[#FF6B1A] group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-
-        <div className="px-6 flex items-center gap-3">
-          <div className="h-px flex-1 bg-[var(--border)]" />
-          <span className="text-[10px] uppercase font-bold text-[var(--muted)] tracking-wider">
-            Or with credentials
-          </span>
-          <div className="h-px flex-1 bg-[var(--border)]" />
         </div>
 
         {/* Form Body */}

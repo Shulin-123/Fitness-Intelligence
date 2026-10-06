@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, X, Zap } from 'lucide-react';
 import { HeroMedia } from '../components/hero/HeroMedia';
@@ -18,7 +18,6 @@ import { ThemeToggle } from '../components/ui/ThemeToggle';
 import { SpringBootStatusBadge } from '../components/ui/SpringBootStatusBadge';
 import { BiomechanicsLabModal } from '../components/ui/BiomechanicsLabModal';
 import { SignInModal } from '../components/auth/SignInModal';
-import { UserMenu } from '../components/auth/UserMenu';
 import { HeroPromptBar } from '../components/ai/HeroPromptBar';
 import { services } from '../services/registry';
 import { useToast } from '../context/ToastContext';
@@ -31,9 +30,23 @@ export const LandingPage: React.FC = () => {
   const [cookieModalOpen, setCookieModalOpen] = useState(false);
   const [signInModalOpen, setSignInModalOpen] = useState(false);
   const [labModalOpen, setLabModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() =>
-    services.auth.getCurrentUser()
-  );
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    const u = services.auth.getCurrentUser();
+    if (u?.email?.includes('alex.demo') || u?.name === 'Alex Morgan' || services.auth.isDemoMode()) {
+      return null;
+    }
+    return u;
+  });
+
+  useEffect(() => {
+    // Purge demo persona so new users never get auto-logged-in as Alex Morgan
+    const user = services.auth.getCurrentUser();
+    if (user?.email?.includes('alex.demo') || user?.name === 'Alex Morgan' || services.auth.isDemoMode()) {
+      services.auth.logout();
+      services.auth.exitDemoMode();
+      setCurrentUser(null);
+    }
+  }, []);
 
   const [announcementDismissed, setAnnouncementDismissed] = useState(() => {
     return sessionStorage.getItem('fi_form_announcement_dismissed') === 'true';
@@ -50,13 +63,6 @@ export const LandingPage: React.FC = () => {
     const chosenGoal = goal || selectedGoal;
     localStorage.removeItem('fitness_onboarding_draft');
     navigate(`/onboarding?goal=${chosenGoal}`);
-  };
-
-  const handleDemoMode = async () => {
-    const user = await services.auth.enableDemoMode();
-    setCurrentUser(user);
-    showToast('Loaded 3-week Demo Persona (Alex Morgan, 28yo).', 'success');
-    navigate('/dashboard');
   };
 
   const goals: { id: Goal; label: string; desc: string }[] = [
@@ -122,12 +128,6 @@ export const LandingPage: React.FC = () => {
             <a href="#faq" className="hover:text-[var(--text)] transition-colors">
               FAQ
             </a>
-            <button
-              onClick={handleDemoMode}
-              className="text-[#FF6B1A] hover:underline font-semibold cursor-pointer"
-            >
-              Try Demo Mode
-            </button>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
@@ -140,25 +140,38 @@ export const LandingPage: React.FC = () => {
             {/* Dark / Light Theme Toggle */}
             <ThemeToggle />
 
-            {/* Sign In or Active User Profile Avatar */}
+            {/* Sign In / Authenticated Status */}
             {currentUser ? (
-              <UserMenu user={currentUser} onLogout={() => setCurrentUser(null)} />
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => navigate('/dashboard')}
+                  className="text-xs font-semibold text-[#FF6B1A] hover:underline px-2.5 py-1.5 rounded-full hover:bg-[var(--surface-2)] transition-colors cursor-pointer"
+                >
+                  Dashboard →
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await services.auth.logout();
+                    setCurrentUser(null);
+                    showToast('Signed out of session.', 'info');
+                  }}
+                  className="text-xs text-[var(--muted)] hover:text-[#F87171] px-2 py-1.5 transition-colors cursor-pointer"
+                  title="Sign Out"
+                >
+                  Sign Out
+                </button>
+              </div>
             ) : (
               <button
                 type="button"
                 onClick={() => setSignInModalOpen(true)}
-                className="text-xs font-semibold text-[var(--muted)] hover:text-[var(--text)] px-2.5 py-1.5 rounded-full hover:bg-[var(--surface-2)] transition-colors cursor-pointer"
+                className="text-xs font-bold text-[var(--text)] hover:text-[#FF6B1A] px-3.5 py-1.5 rounded-full border border-[var(--border)] hover:border-[#FF6B1A] transition-colors cursor-pointer bg-[var(--surface-2)] shadow-sm"
               >
                 Sign In
               </button>
             )}
-
-            <button
-              onClick={handleDemoMode}
-              className="text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors cursor-pointer hidden md:block"
-            >
-              Demo Mode
-            </button>
 
             <Button
               variant="primary"
@@ -223,10 +236,10 @@ export const LandingPage: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={handleDemoMode}
+                onClick={() => setSignInModalOpen(true)}
                 className="text-xs text-white/80 hover:text-white underline underline-offset-4 cursor-pointer"
               >
-                or explore 3-week demo persona
+                or sign in to existing session
               </button>
             </div>
 
@@ -335,10 +348,10 @@ export const LandingPage: React.FC = () => {
             <Button
               variant="secondary"
               size="lg"
-              onClick={handleDemoMode}
+              onClick={() => setSignInModalOpen(true)}
               className="w-full sm:w-auto text-xs"
             >
-              <span>Launch 3-Week Historical Demo</span>
+              <span>Sign In to Account</span>
             </Button>
           </div>
         </div>
@@ -357,10 +370,10 @@ export const LandingPage: React.FC = () => {
           <div className="flex flex-wrap items-center justify-center md:justify-end gap-5 text-xs font-semibold">
             <CookieTag variant="text" onClick={() => setCookieModalOpen(true)} />
             <button
-              onClick={handleDemoMode}
+              onClick={() => setSignInModalOpen(true)}
               className="text-[#FF6B1A] hover:underline cursor-pointer"
             >
-              Try Demo Mode
+              Sign In
             </button>
             <button
               onClick={() => handleStartOnboarding()}
