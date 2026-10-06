@@ -27,7 +27,7 @@ export function getBackendUrl(): string {
 
     // Hosted on GitHub Pages: default to public live cloud/tunnel URL
     if (hostname.includes('github.io') || window.location.protocol === 'https:') {
-      return 'https://congratulations-dishes-sox-patterns.trycloudflare.com/api';
+      return 'https://clarity-deposit-serve-auburn.trycloudflare.com/api';
     }
   }
   return (import.meta as any).env?.VITE_SPRING_BOOT_API_URL || 'http://localhost:8080/api';

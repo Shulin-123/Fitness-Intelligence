@@ -157,7 +157,7 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
                   <span>Free Cloud Backend Connection</span>
                 </div>
                 <a
-                  href="https://render.com/deploy?repo=https://github.com/Shulin-123/Fitness-Intelligence"
+                  href="https://render.com/deploy?repo=https://github.com/ayaskantdas977-hub/Fitness-Intelligence"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 text-[11px] font-bold text-[#FF6B1A] hover:underline"
