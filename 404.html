@@ -16,6 +16,11 @@
         if (path.startsWith('/')) {
           path = path.slice(1);
         }
+        // If an API endpoint was requested without trailing slash, redirect to trailing slash
+        if (path.startsWith('api/') && !path.endsWith('/')) {
+          window.location.replace(repoName + '/' + path + '/');
+          return;
+        }
         var search = window.location.search || '';
         var hash = window.location.hash || '';
         var target = repoName + '/#/' + path + search + hash;
