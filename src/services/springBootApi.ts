@@ -24,6 +24,11 @@ export function getBackendUrl(): string {
     ) {
       return `http://${hostname}:8080/api`;
     }
+
+    // Hosted on GitHub Pages: default to public live cloud/tunnel URL
+    if (hostname.includes('github.io') || window.location.protocol === 'https:') {
+      return 'https://congratulations-dishes-sox-patterns.trycloudflare.com/api';
+    }
   }
   return (import.meta as any).env?.VITE_SPRING_BOOT_API_URL || 'http://localhost:8080/api';
 }
