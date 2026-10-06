@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastProvider } from './context/ToastContext';
 import { WhyDrawerProvider } from './context/WhyDrawerContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -19,7 +19,7 @@ import { AuthPage } from './pages/AuthPage';
 
 export function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider>
         <ToastProvider>
           <WhyDrawerProvider>
@@ -44,7 +44,7 @@ export function App() {
           </WhyDrawerProvider>
         </ToastProvider>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

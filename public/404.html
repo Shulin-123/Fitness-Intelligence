@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness Intelligence</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // Redirects direct 404 paths to HashRouter so refresh never fails
+      (function() {
+        var path = window.location.pathname;
+        var repoName = '/Fitness-Intelligence';
+        if (path.startsWith(repoName)) {
+          path = path.slice(repoName.length);
+        }
+        if (path.startsWith('/')) {
+          path = path.slice(1);
+        }
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+        var target = repoName + '/#/' + path + search + hash;
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body style="background-color: #0F0B09; color: #FFF4EC; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Loading Fitness Intelligence...</p>
+  </body>
+</html>
