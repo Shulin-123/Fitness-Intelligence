@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Dumbbell, Flame, HeartPulse, X, Zap, CheckCircle2, RefreshCw } from 'lucide-react';
 import { BACKEND_URL } from '../../services/springBootApi';
 
@@ -95,9 +96,9 @@ export const BiomechanicsLabModal: React.FC<{ isOpen: boolean; onClose: () => vo
     }
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -478,6 +479,7 @@ export const BiomechanicsLabModal: React.FC<{ isOpen: boolean; onClose: () => vo
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

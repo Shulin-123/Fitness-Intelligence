@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Server, Activity, Database, CheckCircle, AlertTriangle, RefreshCw, X, FlaskConical, Cloud, ExternalLink, Save, RotateCcw } from 'lucide-react';
 import { pingBackendHealth, type BackendHealthStatus, getBackendUrl, setCustomBackendUrl } from '../../services/springBootApi';
 import { BiomechanicsLabModal } from './BiomechanicsLabModal';
@@ -82,15 +83,15 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
       </button>
 
       {/* Backend Details Modal */}
-      {modalOpen && (
+      {modalOpen && typeof document !== 'undefined' && createPortal(
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="w-full max-w-lg bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden p-6 relative max-h-[90vh] overflow-y-auto"
+            className="w-full max-w-lg bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden p-6 relative max-h-[85vh] overflow-y-auto my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -303,7 +304,8 @@ export const SpringBootStatusBadge: React.FC<{ className?: string }> = ({ classN
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Interactive Biomechanics Lab Modal */}
